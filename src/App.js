@@ -2,7 +2,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const count = useSelector((state) => state.count);
+  const count = useSelector((state) => state.cash.count);
   const dispatch = useDispatch();
 
   const handlerAdd = (payload) => dispatch({ type: "ADD", payload });
