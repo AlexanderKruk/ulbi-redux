@@ -1,6 +1,15 @@
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addCustomerAction, delCustomerAction } from "./store/customerReducer";
+import {
+  addCustomerAction,
+  delCustomerAction,
+  addCustomerSagaAction,
+} from "./store/customerReducer";
+import { fetchCustomers } from "./store/asyncActions/customer";
+import {
+  asyncIncrementSagaCreator,
+  asyncDecrimentSageCreator,
+} from "./store/cashReducer";
 
 function App() {
   const count = useSelector((state) => state.cash.count);
@@ -19,9 +28,12 @@ function App() {
   return (
     <div>
       <h1>{count}</h1>
-      <button onClick={() => handlerAdd(Number(prompt()))}>ADD</button>
-      <button onClick={() => handlerDelete(Number(prompt()))}>DEL</button>
+      <button onClick={() => dispatch(asyncIncrementSagaCreator())}>ADD</button>
+      <button onClick={() => dispatch(asyncDecrimentSageCreator())}>DEL</button>
       <button onClick={() => handlerAddCustomer(prompt())}>Add Customer</button>
+      <button onClick={() => dispatch(addCustomerSagaAction())}>
+        Add Many Customers
+      </button>
       {customer.length > 0 ? (
         customer.map((item) => (
           <div
